@@ -16,6 +16,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 import { current } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/user";
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -51,7 +53,7 @@ export default function Example() {
       setNavigation(newNavigation);
     }
   }, [asPath]);
-
+  const user = useSelector(selectUser);
   return (
     <>
       {/*
@@ -285,6 +287,7 @@ export default function Example() {
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <h1 className="text-2xl font-semibold text-gray-900">
+                  Hello {user.user.email.split("@")[0]}
                   {window.location.href.includes("new")
                     ? "New Student"
                     : " Dashboard Student"}

@@ -1,6 +1,5 @@
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { deleteStudent } from "./../store/student";
 export default function Student({ student }) {
   const dispatch = useDispatch();

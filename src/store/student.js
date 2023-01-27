@@ -1,20 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
   student: [
     {
+      id: nanoid(),
       name: "Leslie Alexander",
       email: "leslie.alexander@example.com",
       major: "Computer Science",
       college: "University of Texas at Austin",
     },
     {
+      id: nanoid(),
       name: "Fatwa Aryasatya Akbar",
       email: "fatwa@gmail.com",
       major: "Computer Science",
       college: "University of Indonesia",
     },
     {
+      id: nanoid(),
       name: "John Doe",
       email: "john.doe@gmail.com",
       major: "Computer Science",
@@ -28,12 +32,19 @@ const studentSlice = createSlice({
   initialState,
   reducers: {
     addStudent: (state, action) => {
-      state.student.push(action.payload);
+      state.student.push({
+        id: nanoid(),
+        name: action.payload.name,
+        email: action.payload.email,
+        major: action.payload.major,
+        college: action.payload.college,
+      });
     },
     deleteStudent: (state, action) => {
-      state.student = state.student.filter(
-        (student) => student.email !== action.payload
+      const index = state.student.findIndex(
+        (student) => student.id === action.payload.id
       );
+      state.student.splice(index, 1);
     },
   },
 });
