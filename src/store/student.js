@@ -30,6 +30,11 @@ const studentSlice = createSlice({
     addStudent: (state, action) => {
       state.student.push(action.payload);
     },
+    deleteStudent: (state, action) => {
+      state.student = state.student.filter(
+        (student) => student.email !== action.payload
+      );
+    },
   },
 });
 
@@ -41,6 +46,6 @@ export const addAsyncStudent = (student) => (dispatch) => {
 
 export const selectStudent = (state) => state.student.student;
 
-export const { addStudent } = studentSlice.actions;
+export const { addStudent, deleteStudent } = studentSlice.actions;
 
 export default studentSlice.reducer;
