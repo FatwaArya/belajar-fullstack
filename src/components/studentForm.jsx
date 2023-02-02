@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addStudent } from "./../store/student";
+import { Button } from "../stories/Button";
 
 export default function StudentForm() {
   const [name, setName] = useState("");
