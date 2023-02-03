@@ -4,7 +4,6 @@ import { selectStudent } from "../store/student";
 
 export default function StudentList() {
   const students = useSelector(selectStudent);
-  console.log(students);
   return (
     <>
       <div className="">

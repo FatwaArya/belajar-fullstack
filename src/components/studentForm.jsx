@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addStudent } from "./../store/student";
-import { Button } from "../stories/Button";
 
 export default function StudentForm() {
   const [name, setName] = useState("");
@@ -38,7 +37,7 @@ export default function StudentForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-testid="student-form">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="mt-1">
             <label
