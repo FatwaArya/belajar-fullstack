@@ -12,7 +12,7 @@
     "build-storybook": "concurrently \"npm:build:*\"",
     "build:css": "npx tailwindcss -i ./src/tailwind.css -o ./public/tailwind.css",
     "build:storybook": "storybook build",
-    "watch:css": "npx tailwindcss -i ./src/index.css -o ./public/index --watch",
+    "watch:css": "npx tailwindcss -i ./src/index.css -o ./public/index.css --watch",
     "watch:storybook": "start-storybook -p 6006"
   },
   "dependencies": {
