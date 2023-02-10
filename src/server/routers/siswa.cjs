@@ -1,15 +1,27 @@
 //make api using express and sequelize
-
 const express = require("express");
 const Student = require("../models/index.cjs").student;
 const router = express.Router();
+const redis = require("redis");
+const redisClient = redis.createClient();
+const axios = require("axios");
 
 router.get("/students", async (req, res) => {
   try {
-    const students = await Student.findAll();
-    res.send(students);
+    redisClient.get("students", async (err, data) => {
+      if (err) throw err;
+
+      if (data !== null) {
+        console.log(data);
+        res.send(data);
+      } else {
+        const students = await Student.findAll();
+        redisClient.setex("students", 3600, JSON.stringify(students));
+        res.send(students);
+      }
+    });
   } catch (e) {
-    res.status(500).send(e.message);
+    res.status(500).send({ error: e.message });
   }
 });
 
