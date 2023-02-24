@@ -3,16 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { setLocalStorage } from "../store/helper/localstorage";
-import { LOCAL_STORAGE_TOKEN, TOKEN } from "../store/constants";
-export default function Login() {
+import { LOCAL_STORAGE_TOKEN } from "../store/constants";
+
+export default function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  console.log(TOKEN);
-
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -23,7 +22,7 @@ export default function Login() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Register
           </h2>
         </div>
 
@@ -33,26 +32,48 @@ export default function Login() {
               className="space-y-6"
               onSubmit={async (e) => {
                 e.preventDefault();
+                const name = e.target.name.value;
                 const email = e.target.email.value;
                 const password = e.target.password.value;
 
                 const newUser = {
+                  name,
                   email,
                   password,
                 };
-
                 try {
                   const registerData = await axios.post(
-                    "http://localhost:3000/users/login",
+                    "http://localhost:3000/users",
                     newUser
                   );
-                  console.log(registerData);
                   setLocalStorage(LOCAL_STORAGE_TOKEN, registerData.data.token);
-                } catch (error) {
-                  console.log(error);
+                  navigate("/login");
+                } catch (err) {
+                  console.log(err);
                 }
               }}
             >
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Name
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="name"
+                    name="name"
+                    type="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    autoComplete="name"
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label
                   htmlFor="email"

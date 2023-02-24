@@ -2,7 +2,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import { deleteStudent } from "./../store/student";
 export default function Student({ student }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <div
@@ -16,9 +16,9 @@ export default function Student({ student }) {
           <button
             className="h-5 w-5 text-gray-400 ml-auto hover:text-red-500"
             data-testid="delete"
-            onClick={() => {
-              dispatch(deleteStudent(student.email));
-            }}
+            // onClick={() => {
+            //   dispatch(deleteStudent(student.email));
+            // }}
           >
             <TrashIcon />
           </button>
